@@ -14,4 +14,10 @@ module.exports = {
   invalidEmail: (value) => (
     { code: 400, message: `"${value}" must be a valid email` }
   ),
+  notFound: (value) => (
+    { code: 401, message: `${value} not found` }
+  ),
+  invalidToken: () => (
+    { code: 401, message: 'Expired or invalid token' }
+  ),
 };
