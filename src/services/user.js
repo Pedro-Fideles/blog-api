@@ -1,5 +1,5 @@
 const { User } = require('../database/models');
-const { createToken } = require('./helpers/token');
+const { createToken, decodeToken } = require('./helpers/token');
 
 module.exports = {
   login: async ({ email, password }) => {
@@ -21,5 +21,17 @@ module.exports = {
     await User.create(data);
 
     return { token: createToken(email) };
+  },
+  verifyToken: async (token) => {
+    const decoded = decodeToken(token);
+
+    if (decoded.error) return decoded;
+
+    const { data: { email } } = decoded;
+    const existingUser = User.findOne({ where: { email } });
+
+    if (!existingUser) return { error: 'invalidToken' };
+
+    return existingUser;
   },
 };
