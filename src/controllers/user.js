@@ -1,5 +1,5 @@
 const User = require('../services/user');
-const errorMessages = require('./helpers/errorMessages');
+const errorMessages = require('../helpers/errorMessages');
 
 module.exports = {
   login: async (req, res, next) => {

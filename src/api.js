@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('./controllers/user');
 const errorMiddleware = require('./middlewares/errorMiddleware');
+const { validatePayload } = require('./middlewares/login');
 
 // ...
 
@@ -8,7 +9,7 @@ const app = express();
 
 app.use(express.json());
 
-app.post('/login', User.login);
+app.post('/login', validatePayload, User.login);
 
 app.use(errorMiddleware);
 
