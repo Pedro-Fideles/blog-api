@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
     email: { unique: true, type: DataTypes.STRING },
     password: DataTypes.STRING,
     image: DataTypes.STRING
+  }, {
+    timestamps: false,
+    tableName: 'Users',
   });
 
   return User;
