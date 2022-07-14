@@ -5,4 +5,7 @@ module.exports = {
   requiredFields: () => (
     { code: 400, message: 'Some required fields are missing' }
   ),
+  registeredUser: (value) => (
+    { code: 409, message: `${value} already registered` }
+  ),
 };

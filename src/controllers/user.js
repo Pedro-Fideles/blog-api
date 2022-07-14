@@ -13,4 +13,15 @@ module.exports = {
 
     res.status(200).json({ token });
   },
+  create: async (req, res, next) => {
+    const { displayName, email, password, image } = req.body;
+
+    const response = await User.create({ displayName, email, password, image });
+
+    const { token, error } = response;
+
+    if (error) return next(errorMessages[error]('User'));
+
+    res.status(201).json({ token });
+  },
 };
