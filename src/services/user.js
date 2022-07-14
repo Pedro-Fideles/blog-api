@@ -1,7 +1,7 @@
 const { User } = require('../database/models');
 const { createToken } = require('./helpers/token');
 
-const user = {
+module.exports = {
   login: async ({ email, password }) => {
     const userFound = await User.findOne({ where: { email } });
 
@@ -12,5 +12,3 @@ const user = {
     return { token: createToken(email) };
   },
 };
-
-module.exports = user;
