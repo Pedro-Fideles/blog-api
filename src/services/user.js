@@ -11,4 +11,15 @@ module.exports = {
 
     return { token: createToken(email) };
   },
+  create: async (data) => {
+    const { email } = data;
+
+    const existingUser = await User.findOne({ where: { email } });
+
+    if (existingUser) return { error: 'registeredUser' };
+
+    await User.create(data);
+
+    return { token: createToken(email) };
+  },
 };
