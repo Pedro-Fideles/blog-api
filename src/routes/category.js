@@ -9,4 +9,6 @@ router.use(User.verifyToken);
 
 router.post('/', categoryValidations.validateName, Category.create);
 
+router.get('/', Category.getAll);
+
 module.exports = router;

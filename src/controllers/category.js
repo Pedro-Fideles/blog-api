@@ -7,4 +7,9 @@ module.exports = {
 
     res.status(201).json(categoryCreated);
   },
+  getAll: async (req, res) => {
+    const categories = await Category.getAll();
+
+    res.status(200).json(categories);
+  },
 };
