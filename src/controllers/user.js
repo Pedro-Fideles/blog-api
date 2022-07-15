@@ -24,21 +24,25 @@ module.exports = {
 
     res.status(201).json({ token });
   },
-  varifyToken: async (req, _res, next) => {
+  verifyToken: async (req, _res, next) => {
     const token = req.headers.authorization;
 
     if (!token || token === '') return next(errorMessages.notFound('Token'));
 
     const tokenUser = await User.verifyToken(token);
     const { error } = tokenUser;
-    
+
     if (error) return next(errorMessages[error]());
 
     req.user = tokenUser;
-    next();
+    return next();
   },
   getAll: async (_req, res) => {
     const users = await User.getAll();
-    res.status(200).json(users);
+    const usersWithoutPassword = users.map((user) => {
+      const { password, ...userWithoutPassword } = user.dataValues;
+      return userWithoutPassword;
+    });
+    res.status(200).json(usersWithoutPassword);
   },
 };

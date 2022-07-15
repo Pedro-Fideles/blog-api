@@ -28,8 +28,8 @@ module.exports = {
     if (decoded.error) return decoded;
 
     const { data: { email } } = decoded;
-    const existingUser = User.findOne({ where: { email } });
-
+    const existingUser = await User.findOne({ where: { email } });
+    
     if (!existingUser) return { error: 'invalidToken' };
 
     return existingUser;

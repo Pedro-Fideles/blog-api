@@ -6,8 +6,8 @@ const router = express.Router();
 
 router.post('/', ...Object.values(userValidations), User.create);
 
-router.use(User.varifyToken);
+router.use(User.verifyToken);
 
-router.get('/user');
+router.get('/', User.getAll);
 
 module.exports = router;
