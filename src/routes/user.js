@@ -10,4 +10,6 @@ router.use(User.verifyToken);
 
 router.get('/', User.getAll);
 
+router.get('/:id', User.getById);
+
 module.exports = router;
