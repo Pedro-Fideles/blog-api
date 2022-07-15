@@ -45,4 +45,15 @@ module.exports = {
     });
     res.status(200).json(usersWithoutPassword);
   },
+  getById: async (req, res, next) => {
+    const { id } = req.params;
+    const user = await User.getById(id);
+
+    const { error } = user;
+    if (error) return next(errorMessages[error]('User'));
+
+    const { password, ...userWithoutPassword } = user.dataValues;
+    
+    res.status(200).json(userWithoutPassword);
+  },
 };

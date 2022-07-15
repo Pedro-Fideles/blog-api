@@ -20,4 +20,7 @@ module.exports = {
   invalidToken: () => (
     { code: 401, message: 'Expired or invalid token' }
   ),
+  notExist: (value) => (
+    { code: 404, message: `${value} does not exist` }
+  ),
 };
