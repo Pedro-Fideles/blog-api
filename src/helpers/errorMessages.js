@@ -23,4 +23,7 @@ module.exports = {
   notExist: (value) => (
     { code: 404, message: `${value} does not exist` }
   ),
+  isRequired: (value) => (
+    { code: 400, message: `"${value}" is required` }
+  ),
 };
