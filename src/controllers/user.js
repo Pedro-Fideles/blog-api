@@ -25,9 +25,9 @@ module.exports = {
     res.status(201).json({ token });
   },
   varifyToken: async (req, _res, next) => {
-    const { token } = req.body;
+    const token = req.headers.authorization;
 
-    if (!token) return next(errorMessages.notFound('Token'));
+    if (!token || token === '') return next(errorMessages.notFound('Token'));
 
     const tokenUser = await User.verifyToken(token);
     const { error } = tokenUser;

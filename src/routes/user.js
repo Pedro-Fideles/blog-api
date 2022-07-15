@@ -6,4 +6,8 @@ const router = express.Router();
 
 router.post('/', ...Object.values(userValidations), User.create);
 
+router.use(User.varifyToken);
+
+router.get('/user');
+
 module.exports = router;
