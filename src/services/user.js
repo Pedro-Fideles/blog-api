@@ -35,4 +35,11 @@ module.exports = {
     return existingUser;
   },
   getAll: () => User.findAll(),
+  getById: async (id) => {
+    const user = await User.findByPk(id);
+
+    if (!user) return { error: 'notExist' };
+
+    return user;
+  },
 };
