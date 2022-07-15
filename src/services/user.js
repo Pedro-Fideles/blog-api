@@ -34,4 +34,5 @@ module.exports = {
 
     return existingUser;
   },
+  getAll: () => User.findAll(),
 };
