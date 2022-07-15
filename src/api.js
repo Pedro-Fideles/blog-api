@@ -3,6 +3,7 @@ const User = require('./controllers/user');
 const errorMiddleware = require('./middlewares/errorMiddleware');
 const { validatePayload } = require('./middlewares/login');
 const userRouter = require('./routes/user');
+const categoryRouter = require('./routes/category');
 
 // ...
 
@@ -13,6 +14,8 @@ app.use(express.json());
 app.post('/login', validatePayload, User.login);
 
 app.use('/user', userRouter);
+
+app.use('/categories', categoryRouter);
 
 app.use(errorMiddleware);
 
