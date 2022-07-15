@@ -37,4 +37,8 @@ module.exports = {
     req.user = tokenUser;
     next();
   },
+  getAll: async (_req, res) => {
+    const users = await User.getAll();
+    res.status(200).json(users);
+  },
 };
