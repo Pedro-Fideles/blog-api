@@ -1,5 +1,5 @@
-const { BlogPost } = require('../database/models');
-const Category = require('./category');
+const { BlogPost, User, Category } = require('../database/models');
+const CategoryService = require('./category');
 const PostCategory = require('./postCategory');
 
 /* {
@@ -12,10 +12,7 @@ module.exports = {
   create: async (data) => {
     const { title, content, userId, categoryIds } = data;
 
-    const categoryExists = await Category.checksIfCategoriesExist(categoryIds);
-
-    console.log('\n\n\n services categoria existente');
-    console.log(categoryExists);
+    const categoryExists = await CategoryService.checksIfCategoriesExist(categoryIds);
 
     if (!categoryExists) {
       return { error: 'notFoundField' };
@@ -28,5 +25,16 @@ module.exports = {
     await PostCategory.createSeveral(categoryIds, id);
 
     return blogPostCreated;
+  },
+  getAll: async (userId) => {
+    const posts = PostCategory.findAll({
+      where: userId,
+      include: [
+        { model: User, as: 'user' },
+        { model: Category, as: 'categories', through: { attributes: [] } },
+      ],
+    });
+
+    return posts;
   },
 };

@@ -13,4 +13,11 @@ module.exports = {
 
     res.status(201).json(blogPostCreated);
   },
+  getAll: async (req, res) => {
+    const { dataValues: { id } } = req.user;
+
+    const posts = BlogPost.getAll(id);
+
+    res.status(200).json(posts);
+  },
 };
