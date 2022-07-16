@@ -49,4 +49,12 @@ module.exports = {
 
     return post;
   },
+  update: async (data, postId, userId) => {
+    const { dataValues: { userId: userPost } } = await BlogPost.findByPk(postId);
+    if (userPost !== userId) return { error: 'unauthorizedUser' };
+
+    await BlogPost.update(data, { where: { userId } });
+
+    return { message: 'success' };
+  },
 };
