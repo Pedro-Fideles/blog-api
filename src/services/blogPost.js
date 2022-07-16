@@ -28,7 +28,7 @@ module.exports = {
   },
   getAll: async (userId) => {
     const posts = await BlogPost.findAll({
-      where: userId,
+      where: { userId },
       include: [
         { model: User, as: 'user', attributes: { exclude: ['password'] } },
         { model: Category, as: 'categories', through: { attributes: [] } },
@@ -36,5 +36,17 @@ module.exports = {
     });
 
     return posts;
+  },
+  getById: async (postId) => {
+    const post = await BlogPost.findByPk(postId, {
+      include: [
+        { model: User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Category, as: 'categories', through: { attributes: [] } },
+      ],
+    });
+
+    if (!post) return { error: 'notExist' };
+
+    return post;
   },
 };
