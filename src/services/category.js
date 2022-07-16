@@ -7,4 +7,11 @@ module.exports = {
     return categoryCreated;
   },
   getAll: () => Category.findAll(),
+  checksIfCategoriesExist: async (categoryIds) => {
+    const existingCategory = Category.findAll({ where: { id: categoryIds } });
+
+    return categoryIds
+      .every((categoryId) => existingCategory
+        .some((category) => category.dataValues.id === categoryId));
+  },
 };
