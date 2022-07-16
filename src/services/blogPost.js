@@ -57,4 +57,13 @@ module.exports = {
 
     return { message: 'success' };
   },
+  delete: async (postId, userId) => {
+    const existingPost = await BlogPost.findByPk(postId);
+    if (!existingPost) return { error: 'notExist' };
+    if (existingPost.dataValues.userId !== userId) return { error: 'unauthorizedUser' };
+
+    await BlogPost.destroy({ where: { id: postId } });
+
+    return { message: 'success' };
+  },
 };
