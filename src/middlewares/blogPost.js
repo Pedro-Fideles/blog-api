@@ -25,11 +25,15 @@ module.exports = {
   validateCategories: (req, _res, next) => {
     const { categoryIds } = req.body;
 
-    switch (true) {
-      case isUndefined(categoryIds) || emptyArray(categoryIds):
-        return next(requiredFields());
-      default:
-        return next();
+    if (req.method === 'POST') {
+      switch (true) {
+        case isUndefined(categoryIds) || emptyArray(categoryIds):
+          return next(requiredFields());
+        default:
+          return next();
+      }
     }
+
+    next();
   },
 };
