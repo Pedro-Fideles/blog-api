@@ -20,4 +20,14 @@ module.exports = {
 
     res.status(200).json(posts);
   },
+  getById: async (req, res, next) => {
+    const { id } = req.params;
+
+    const post = await BlogPost.getById(id);
+
+    const { error } = post;
+    if (error) return next(errorMessages[error]('Post'));
+
+    res.status(200).json(post);
+  },
 };
