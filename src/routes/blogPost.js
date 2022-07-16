@@ -11,4 +11,6 @@ router.post('/', ...Object.values(validateBlogPost), BlogPost.create);
 
 router.get('/', BlogPost.getAll);
 
+router.get('/:id', BlogPost.getById);
+
 module.exports = router;
