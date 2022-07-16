@@ -12,12 +12,17 @@ module.exports = {
   create: async (data) => {
     const { title, content, userId, categoryIds } = data;
 
-    if (!Category.checksIfCategoriesExist(categoryIds)) {
-      return { error: 'notFound' };
+    const categoryExists = await Category.checksIfCategoriesExist(categoryIds);
+
+    console.log('\n\n\n services categoria existente');
+    console.log(categoryExists);
+
+    if (!categoryExists) {
+      return { error: 'notFoundField' };
     }
 
     const blogPostCreated = await BlogPost.create({ title, content, userId });
-    
+
     const { id } = blogPostCreated.dataValues;
 
     await PostCategory.createSeveral(categoryIds, id);

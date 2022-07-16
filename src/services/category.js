@@ -8,10 +8,12 @@ module.exports = {
   },
   getAll: () => Category.findAll(),
   checksIfCategoriesExist: async (categoryIds) => {
-    const existingCategory = Category.findAll({ where: { id: categoryIds } });
+    const existingCategory = await Category.findAll({ where: { id: categoryIds } });
 
-    return categoryIds
+    const categoriesExists = categoryIds
       .every((categoryId) => existingCategory
         .some((category) => category.dataValues.id === categoryId));
+
+    return categoriesExists;
   },
 };

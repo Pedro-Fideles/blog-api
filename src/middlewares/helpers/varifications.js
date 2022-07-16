@@ -7,4 +7,5 @@ module.exports = {
 
     return !regexValidEmail.test(value);
   },
+  emptyArray: (value) => value.length === 0,
 };

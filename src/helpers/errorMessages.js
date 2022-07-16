@@ -17,6 +17,9 @@ module.exports = {
   notFound: (value) => (
     { code: 401, message: `${value} not found` }
   ),
+  notFoundField: (value) => (
+    { code: 400, message: `"${value}" not found` }
+  ),
   invalidToken: () => (
     { code: 401, message: 'Expired or invalid token' }
   ),
