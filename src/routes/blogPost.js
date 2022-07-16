@@ -9,4 +9,6 @@ router.use(User.verifyToken);
 
 router.post('/', ...Object.values(validateBlogPost), BlogPost.create);
 
+router.get('/', BlogPost.getAll);
+
 module.exports = router;

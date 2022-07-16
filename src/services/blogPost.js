@@ -27,10 +27,10 @@ module.exports = {
     return blogPostCreated;
   },
   getAll: async (userId) => {
-    const posts = PostCategory.findAll({
+    const posts = await BlogPost.findAll({
       where: userId,
       include: [
-        { model: User, as: 'user' },
+        { model: User, as: 'user', attributes: { exclude: ['password'] } },
         { model: Category, as: 'categories', through: { attributes: [] } },
       ],
     });

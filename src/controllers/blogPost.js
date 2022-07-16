@@ -16,7 +16,7 @@ module.exports = {
   getAll: async (req, res) => {
     const { dataValues: { id } } = req.user;
 
-    const posts = BlogPost.getAll(id);
+    const posts = await BlogPost.getAll(id);
 
     res.status(200).json(posts);
   },
