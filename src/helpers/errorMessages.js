@@ -29,4 +29,7 @@ module.exports = {
   isRequired: (value) => (
     { code: 400, message: `"${value}" is required` }
   ),
+  unauthorizedUser: () => (
+    { code: 401, message: 'Unauthorized user' }
+  ),
 };

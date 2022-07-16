@@ -30,4 +30,17 @@ module.exports = {
 
     res.status(200).json(post);
   },
+  update: async (req, res, next) => {
+    const { id: postId } = req.params;
+    const { dataValues: { id: userId } } = req.user;
+    const { title, content } = req.body;
+
+    const creationOfBlogPost = await BlogPost.update({ title, content }, postId, userId);
+    const { error } = creationOfBlogPost;
+    if (error) return next(errorMessages[error]());
+
+    const updatedPost = await BlogPost.getById(postId);
+
+    res.status(200).json(updatedPost);
+  },
 };
