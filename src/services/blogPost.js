@@ -16,11 +16,11 @@ module.exports = {
       return { error: 'notFound' };
     }
 
-    const blogPostCreated = BlogPost.create({ title, content, userId });
+    const blogPostCreated = await BlogPost.create({ title, content, userId });
     
     const { id } = blogPostCreated.dataValues;
 
-    PostCategory.createSeveral(categoryIds, id);
+    await PostCategory.createSeveral(categoryIds, id);
 
     return blogPostCreated;
   },
