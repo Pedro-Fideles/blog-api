@@ -15,4 +15,6 @@ router.get('/:id', BlogPost.getById);
 
 router.put('/:id', ...Object.values(validateBlogPost), BlogPost.update);
 
+router.delete('/:id', BlogPost.delete);
+
 module.exports = router;
