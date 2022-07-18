@@ -42,4 +42,5 @@ module.exports = {
 
     return user;
   },
+  delete: (id) => User.destroy({ where: { id } }),
 };
