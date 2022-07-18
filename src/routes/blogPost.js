@@ -9,6 +9,8 @@ router.use(User.verifyToken);
 
 router.post('/', ...Object.values(validateBlogPost), BlogPost.create);
 
+router.get('/search', BlogPost.search);
+
 router.get('/', BlogPost.getAll);
 
 router.get('/:id', BlogPost.getById);
