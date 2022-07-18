@@ -68,7 +68,7 @@ module.exports = {
     return { message: 'success' };
   },
   search: async (term) => {
-    const searchResult = BlogPost.findAll({
+    const searchResult = await BlogPost.findAll({
       where: {
         [or]: [
           { title: { [like]: `%${term}%` } },

@@ -53,4 +53,11 @@ module.exports = {
 
     res.status(204).end();
   },
+  search: async (req, res) => {
+    const { q } = req.query;
+
+    const posts = await BlogPost.search(q);
+
+    res.status(200).json(posts);
+  },
 };
