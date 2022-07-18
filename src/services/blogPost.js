@@ -1,3 +1,4 @@
+const { or, like } = require('sequelize').Op;
 const { BlogPost, User, Category } = require('../database/models');
 const CategoryService = require('./category');
 const PostCategory = require('./postCategory');
@@ -65,5 +66,21 @@ module.exports = {
     await BlogPost.destroy({ where: { id: postId } });
 
     return { message: 'success' };
+  },
+  search: async (term) => {
+    const searchResult = BlogPost.findAll({
+      where: {
+        [or]: [
+          { title: { [like]: `%${term}%` } },
+          { content: { [like]: `%${term}%` } },
+        ],
+      },
+      include: [
+        { model: User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Category, as: 'categories', through: { attributes: [] } },
+      ],
+    });
+
+    return searchResult;
   },
 };
