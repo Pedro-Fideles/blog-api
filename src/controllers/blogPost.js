@@ -43,4 +43,14 @@ module.exports = {
 
     res.status(200).json(updatedPost);
   },
+  delete: async (req, res, next) => {
+    const { id: postId } = req.params;
+    const { dataValues: { id: userId } } = req.user;
+
+    const deletePost = await BlogPost.delete(postId, userId);
+    const { error } = deletePost;
+    if (error) return (next(errorMessages[error]('Post')));
+
+    res.status(204).end();
+  },
 };
