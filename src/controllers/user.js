@@ -56,4 +56,11 @@ module.exports = {
     
     res.status(200).json(userWithoutPassword);
   },
+  delete: async (req, res) => {
+    const { dataValues: { id } } = req.user;
+
+    await User.delete(id);
+
+    res.status(204).end();
+  },
 };
